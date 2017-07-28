@@ -7,7 +7,17 @@ The goal of the project is to develop a pipeline to detect and plot the lane lin
 
 [//]: # (Image References)
 
-[image1]: ./examples/grayscale.jpg "Grayscale"
+[image1]: ./test_images-output/hsvImg.png "HSV"
+
+[image2]: ./test_images-output/maskedImage.png "Masked image"
+
+[image3]: ./test_images-output/edgeImage.png "Canny edge detection output"
+
+[image4]: ./test_images-output/roiImage.png "ROI for further processing"
+
+[image5]: ./test_images-output/houghImage.png "Hough lines"
+
+[image6]: ./test_images-output/combinedImage.png "Final result"
 
 ---
 
@@ -19,19 +29,31 @@ In this project the following pipeline is used to detect and plot the lane lines
 
 1. Convert the image from RGB color space to HSV color space. This is done to have minimal impact from the lighting conditions, timing of the day etc.
 
+![alt text][image1]
+
 2. Gaussian filter with a kernel size of 3 is applied to this image to smoothen it.
 
 3. A mask is generated using HSV color thresholds for yellow and white lines. The mask is applied to the image.
+
+![alt text][image2]
 
 4. The image is then converted to grayscale image for further processing.
 
 5. Canny edge detector is applied to the image with thresholds of [50,150] to detect the edges in the masked image.
 
+![alt text][image3]
+
 6. In order to avoid noise due to other features in the image, a Region of interest (ROI) is selected. This will focus the    view on ego lane.
+
+![alt text][image4]
 
 7. Then houghlines is used to detect the lines and further processing is done as explained below to obtain both the left      and right lane lines.
 
+![alt text][image5]
+
 8. Once obtained the lane lines are drawn on an image.
+
+![alt text][image6]
 
 In this project the helper functions given in the project is used to perform most of the above mentioned processing.
 
@@ -48,8 +70,6 @@ Modifications to the draw_lines() method:
 5. In order to draw a line the following points were used: (x1, imageHeight), (x2, 0.65 * imageHeight). z1 and x2 were        calculated using the co-efficients of the lines
 
 6. Slopes of both the lines are stored for use in the upcoming frames.
-
-![alt text][image1]
 
 
 ### 2. Identify potential shortcomings with your current pipeline
