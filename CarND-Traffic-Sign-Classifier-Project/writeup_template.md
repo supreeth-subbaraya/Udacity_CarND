@@ -1,4 +1,4 @@
-# **Traffic Sign Recognition ** 
+# Traffic Sign Recognition 
 
 ## Overview of the Project
 
@@ -17,14 +17,8 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[image1]: ./examples/Data_hist.png "Visualization"
+
 
 ## Rubric Points
 
