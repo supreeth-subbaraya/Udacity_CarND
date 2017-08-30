@@ -48,16 +48,16 @@ Here is an exploratory visualization of the data set. It is a bar chart showing 
 
 As a first step after viewing the training set, I preprocessed each of the images in training, test and validation test as follows.
 
-1. Convert to grayscale
-2. Equalize the histogram 
-3. Normalize the image.
+1. Convert to grayscale -  Different traffic signs have similiar colors. This preprocessing step is done to be invariant to color.
+2. Equalize the histogram - This is done to be invariant to brightness of the image.
+3. Normalize the image. - Generally things tend to work well when the data is zero centered and with a standard deviation of 1
 
 I tried using image augmentation to generate more training set. But it did not improve the accuracy which  might be due to the capacity of the network used
 
 
 #### Model Architecture
 
-I used the LeNet model with very few modifications.
+I used the LeNet model with very few modifications. LeNet model was used to classify MNIST dataset. This dataset had similiar images (grayscale, size etc). Hence I started with the LeNet model and then modified it to improve the accuracies.
 
 My final model consisted of the following layers:
 
@@ -106,7 +106,7 @@ The above mentioned modification to the LeNet model was used here. The following
 
 ### Test a Model on New Images
 
-10 sign images were used which is present in the download_images/reshaped directory in this repo.
+10 sign images were used which is present in the download_images/reshaped directory in this repo. These images collected from the web were cropped and resized to (32,32,3). The images are bright compared to the ones in the trainig set. This might result in a misclassification.Also they have a better quality which is different from the training set.
 
 
 Here are the results of the prediction:
@@ -126,3 +126,7 @@ Here are the results of the prediction:
 
 
 The model was able to guess 5/10 test images. One of the images was not in the dataset. Hence it would not be classified correctly. 
+
+The above accuracy of 50% as opposed to the test accuracy of 95.2 might be due to overfitting. Better regularization would help improve this accuracy.
+
+The certainity with which the model has classified each of the images is listed in the above table. Also the code has plots depicting both the certainities and uncertainities for the classification. Say for example, the image with Speed limit (50km/h) , was classified as 'No passing for vehicles over 3.5 metric tons' with a probability of 0.78. However it was uncertain about this with a probability of 0.22 which was spread across different classes like 'Keep Right', 'No entry' and 'No passing' . 
