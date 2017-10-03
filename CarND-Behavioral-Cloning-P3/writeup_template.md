@@ -12,7 +12,7 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./model_summary.png "Model Summary"
-[image2]: ./examples/placeholder.png "Grayscaling"
+[image2]: ./model.png "Model"
 [image3]: ./examples/placeholder_small.png "Recovery Image"
 [image4]: ./examples/placeholder_small.png "Recovery Image"
 [image5]: ./examples/placeholder_small.png "Recovery Image"
@@ -104,6 +104,10 @@ Also the drive.py was modified (images resized and cropped) to get it working wi
 The model architecture has been discussed above. A summary of the model is as below
 
 ![alt text][image1]
+
+The following is the plot of the model from keras.
+
+![alt text][image2]
 
 #### 3. Creation of the Training Set & Training Process
 
