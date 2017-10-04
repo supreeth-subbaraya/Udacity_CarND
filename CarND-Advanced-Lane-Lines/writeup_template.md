@@ -19,8 +19,9 @@ The goals / steps of this project are the following:
 [image2]: ./output_images/findChessBoard_Output.png "Output"
 [image3]: ./output_images/undistorted_input.jpg "Input"
 [image4]: ./output_images/undistorted_output.png "undistorted output"
-[image5]: ./examples/color_fit_lines.jpg "Fit Visual"
-[image6]: ./examples/example_output.jpg "Output"
+[image5]: ./output_images/undistorted_test_output.png "undistorted test output"
+[image6]: ./output_images/straight_lines1.jpg "color thresh input"
+[image7]: ./output_images/color_thresholded.png "color thresh"
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
@@ -44,8 +45,7 @@ The camera calibration is implemented in the calbrateCamera() method of the uplo
 2. Based on this size, I create object points which are locations of the form (x,y,z)
 3. Then I find the checkerboard points for each of the image. The following is an example on an image.
 
-![alt text][image1]
-![alt text][image2]
+![alt text][image1] ![alt text][image2]
 
 4. After having the object points and image points from all the given images, I use OpenCV's calibrateCamera() to get the camera matrix, distortion coefficients, rotation and translation vectors.
 
@@ -58,14 +58,23 @@ The camera calibration is implemented in the calbrateCamera() method of the uplo
 
 #### 1. Provide an example of a distortion-corrected image.
 
-To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
-![alt text][image2]
+I applied the above mentioned undistort technique to one of the test images to obtain the following undistorted image.
+
+![alt text][image5]
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+Looking at the images and the video, it seemed that the pipeline would give good results if only the yellow and white line were captured. Hence i tried to use different thresholds for each of the color. I used two formats of the test images here, one HLS image and other the normal RGB one. I noted down the values of yellow and white lines in each of the hls and rgb images for each of the test image. Once obtained it seemed the colors lied in the following buckets
 
-![alt text][image3]
+| Color         | Type          |      Max       |        Min        |
+|:-------------:|:-------------:| :-------------:| :-------------:| 
+| Yellow        | HLS           |   (15,100,180) | (25,165,255) |
+| White        | RGB           |   (200,200,200) | (255,255,255) |
+
+After obtaining this I applied these thresholds and implemented the colorThreshold() method in the code to obtain the following output.
+
+![alt text][image6]
+![alt text][image7]
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
