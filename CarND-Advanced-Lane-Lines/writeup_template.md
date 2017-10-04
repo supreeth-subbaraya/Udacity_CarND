@@ -139,4 +139,6 @@ Here's a [link to my video result](./output_images/project_video_output.mp4)
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+1. Initially the pipeline was not working fine since the binary thresholded image included all the pixels and was thresholded on only the S-channel. Understanding that a good threshold would result in good results tool some time.
+2. The pipeline is likely to fail in the event of another vehicle with a white or yellow color in the front.
+3. Currently no averaging is done on some previous n number of lane lines. Hence at some places it is jittery. This can be avoided by averaging
