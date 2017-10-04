@@ -24,6 +24,7 @@ The goals / steps of this project are the following:
 [image7]: ./output_images/color_thresholded.png "color thresh"
 [image8]: ./output_images/transformed.png "transformed"
 [image9]: ./output_images/linePixels.png "line pixels"
+[image10]: ./output_images/output.png "output"
 
 [video1]: ./project_video.mp4 "Video"
 
@@ -103,7 +104,7 @@ The following is an example of the warped image which shows how the parallel lin
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-The following is the pipeline for identifying the lane line pixels.
+The following is the pipeline for identifying the lane line pixels. This is implemented from lines 27-138 in 'Pipeline' section of the notebook.
 
 1.  After obtaining the perspective transform of the binary thresholded image, we find the histogram column wise.
 2. We do a sliding window approach as given in the class lectures on the two peaks of the histogram to obtain the x,y points of the left and right curves.
@@ -116,13 +117,13 @@ The following is an image with the line fitted on the lane pixels.
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+The radius of curvature and posiion is calculated in the section 'Pipeline' in lines 138-160. I used the same method mentioned in the lectures. 
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+The following is the result image.
 
-![alt text][image6]
+![alt text][image10]
 
 ---
 
