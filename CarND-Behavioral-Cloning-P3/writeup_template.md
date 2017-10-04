@@ -13,11 +13,13 @@ The goals / steps of this project are the following:
 
 [image1]: ./model_summary.png "Model Summary"
 [image2]: ./model.png "Model"
-[image3]: ./examples/placeholder_small.png "Recovery Image"
-[image4]: ./examples/placeholder_small.png "Recovery Image"
-[image5]: ./examples/placeholder_small.png "Recovery Image"
-[image6]: ./examples/placeholder_small.png "Normal Image"
-[image7]: ./examples/placeholder_small.png "Flipped Image"
+[image3]: ./data/recovery_1.jpg "Recovery Image"
+[image4]: ./data/recovery_2.jpg "Recovery Image"
+[image5]: ./data/recovery_3.jpg "Recovery Image"
+[image6]: ./data/recovery_4.jpg "Recovery Image"
+[image7]: ./data/cropped_resized_image.png "Cropped image"
+[image8]: ./data/flipped_image.png "Flipped image"
+
 
 ## Rubric Points
 ---
@@ -113,5 +115,17 @@ The following is the plot of the model from keras.
 
 As mentioned above the following are the ways I collected data.
 
-1. Drive for one lap, with smooth driving, driving mostly at the center
-2. Recobery data: I would go towards the edges, start recording, recover and stop recording.
+1. Drive for one lap, with smooth driving, driving mostly at the center. I collected more data by drivign another lap. The following is a sample of the cropped and resized training image.
+
+![alt text][image7]
+
+2. Recovery data: I would go towards the edges, start recording, recover and stop recording. The following are a sequence of images doing the same
+
+![alt text][image3]
+![alt text][image4]
+![alt text][image5]
+![alt text][image6]
+
+I also flipped the images so that there is a balance in the data. The following is a sample of the flipped image of the above mentioned cropped image.
+
+![alt text][image8]
