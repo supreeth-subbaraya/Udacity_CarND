@@ -22,6 +22,9 @@ The goals / steps of this project are the following:
 [image5]: ./output_images/undistorted_test_output.png "undistorted test output"
 [image6]: ./output_images/straight_lines1.jpg "color thresh input"
 [image7]: ./output_images/color_thresholded.png "color thresh"
+[image8]: ./output_images/transformed.png "transformed"
+[image9]: ./output_images/linePixels.png "line pixels"
+
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
@@ -78,39 +81,38 @@ After obtaining this I applied these thresholds and implemented the colorThresho
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The perspective transform is implemented in the jupyter notebook by the method transformImage(). I pass the source and destination points for the transformation.
 
 ```python
-src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
-    [((img_size[0] / 6) - 10), img_size[1]],
-    [(img_size[0] * 5 / 6) + 60, img_size[1]],
-    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
-dst = np.float32(
-    [[(img_size[0] / 4), 0],
-    [(img_size[0] / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), 0]])
+srcPoints = np.float32([ [263,imageSize[0]], [560,470], [720,470], [1046,imageSize[0]] ])
+dstPoints = np.float32([ [100,imageSize[0]], [100,0], [1000,0], [1000,imageSize[0]] ])
 ```
 
 This resulted in the following source and destination points:
 
 | Source        | Destination   | 
 |:-------------:|:-------------:| 
-| 585, 460      | 320, 0        | 
-| 203, 720      | 320, 720      |
-| 1127, 720     | 960, 720      |
-| 695, 460      | 960, 0        |
+| 263, 720      | 100, 720        | 
+| 560, 470      | 100, 0      |
+| 720, 470     | 1000, 0      |
+| 1046, 720      | 1000, 720        |
 
-I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
+The following is an example of the warped image which shows how the parallel lines are preserved
 
-![alt text][image4]
+![alt text][image8]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+The following is the pipeline for identifying the lane line pixels.
 
-![alt text][image5]
+1.  After obtaining the perspective transform of the binary thresholded image, we find the histogram column wise.
+2. We do a sliding window approach as given in the class lectures on the two peaks of the histogram to obtain the x,y points of the left and right curves.
+3. We then obtain the left and right fit using the polyfit() method. This is done in the pipeline() method in the notebook.
+4. Once the line is found then we can just constrain our window of search in the subsequent frames as suggested in the lectures
+
+The following is an image with the line fitted on the lane pixels.
+
+![alt text][image9]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
