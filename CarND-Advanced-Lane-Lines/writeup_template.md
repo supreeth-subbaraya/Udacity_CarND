@@ -16,7 +16,7 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./output_images/findchessBoard_Input.jpg "Input"
-[image2]: ./output_images/findchessBoard_Output.png "Output"
+[image2]: ./output_images/findChessBoard_Output.png "Output"
 [image3]: ./output_images/undistorted_input.jpg "Input"
 [image4]: ./output_images/undistorted_output.png "undistorted output"
 [image5]: ./examples/color_fit_lines.jpg "Fit Visual"
