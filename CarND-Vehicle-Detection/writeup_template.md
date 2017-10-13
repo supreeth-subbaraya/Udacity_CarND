@@ -15,24 +15,22 @@ The goals / steps of this project are the following:
 [image2]: ./output_images/notCarImage.png
 [image3]: ./output_images/hogCarImage.png
 [image4]: ./output_images/hogFeatures.png
-[image5]: ./examples/bboxes_and_heat.png
-[image6]: ./examples/labels_map.png
-[image7]: ./examples/output_bboxes.png
+[image5]: ./output_images/SpatialFeatures.png
+[image6]: ./output_images/Histogram.png
+[image7]: ./output_images/searchWindows.png
+[image8]: ./output_images/searchWindowOut.png
 [video1]: ./project_video.mp4
 
-## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
-###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
-
 ---
-###Writeup / README
+### Writeup / README
 
 ####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
 
 The following is the contents of the writeup. My notebook in the repository is VehicelDetection.ipynb. 
 
-###Histogram of Oriented Gradients (HOG)
+### Histogram of Oriented Gradients (HOG)
 
-####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
+#### 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
 The code for extracting the hog and color features is in the section "Extract Features" in the notebook
 
@@ -46,21 +44,41 @@ I explored some of the colorspaces and then settled on YCrCb since it was used i
 ![alt text][image3]
 ![alt text][image4]
 
+The extract_features method also uses the spatial binning and color hisograms for the colorspace chosen. The following are the plots of these features on a car image.
+
+![alt text][image5]
+![alt text][image6]
+
 ####2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and...
+The following were the parameters I used for hog features. Since these were used in the lecture class examples and worked well I used the following parameters. 
+
+(orient, pix_per_cell, cell_per_block) = (9,8,2)
+
+For color histogram I used 64 histogram bins and spatial_size of (32,32) for spatial binning. These were zeroed in on after trying out a coupe of other values for them.
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using...
+The section 'Train model' in notebook shows the training process for the classifier. The following was done
+
+1. The hog, color histogram and spatial bin features were extracted using extract_festures
+2. This was done for both the car and non-car images
+3. These features combined together were normalized using StandardScaler()
+4. Then this dataset was split into train-test with 80-20 breakout
+5. LinearSVC() was used to train the classifier
+6. A accuracy of 0.99 was ontained.
 
 ###Sliding Window Search
 
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
+The sliding window search is implemened in 'Search Windows' and 'Slide Window' sctions. The 'Find Cars' section implements this for the find_cars method.  The scales were chosen between 1 to 2.5 after checking with  test images and the video with the scales. The number of scales used was 10 in  this range. The following is the output of the search window.
 
-![alt text][image3]
+![alt text][image7]
+
+The following is the output after applying the find_cars method on the same image.
+
+![alt text][image8]
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
