@@ -19,6 +19,12 @@ The goals / steps of this project are the following:
 [image6]: ./output_images/Histogram.png
 [image7]: ./output_images/searchWindows.png
 [image8]: ./output_images/searchWindowOut.png
+[image9]: ./output_images/test6Out.png
+[image10]: ./output_images/test5Out.png
+[image11]: ./output_images/test4Out.png
+[image12]: ./output_images/test1Out.png
+[image13]: ./output_images/heatmap.png
+
 [video1]: ./project_video.mp4
 
 ---
@@ -49,7 +55,7 @@ The extract_features method also uses the spatial binning and color hisograms fo
 ![alt text][image5]
 ![alt text][image6]
 
-####2. Explain how you settled on your final choice of HOG parameters.
+#### 2. Explain how you settled on your final choice of HOG parameters.
 
 The following were the parameters I used for hog features. Since these were used in the lecture class examples and worked well I used the following parameters. 
 
@@ -57,7 +63,7 @@ The following were the parameters I used for hog features. Since these were used
 
 For color histogram I used 64 histogram bins and spatial_size of (32,32) for spatial binning. These were zeroed in on after trying out a coupe of other values for them.
 
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+#### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
 The section 'Train model' in notebook shows the training process for the classifier. The following was done
 
@@ -68,11 +74,11 @@ The section 'Train model' in notebook shows the training process for the classif
 5. LinearSVC() was used to train the classifier
 6. A accuracy of 0.99 was ontained.
 
-###Sliding Window Search
+### Sliding Window Search
 
-####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+#### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-The sliding window search is implemened in 'Search Windows' and 'Slide Window' sctions. The 'Find Cars' section implements this for the find_cars method.  The scales were chosen between 1 to 2.5 after checking with  test images and the video with the scales. The number of scales used was 10 in  this range. The following is the output of the search window.
+The sliding window search is implemened in 'Search Windows' and 'Slide Window' sctions. The 'Find Cars' section implements this for the find_cars method.  The scales were chosen between 1 to 2.5 after checking with  test images and the video with the scales. The number of scales used was 10 in  this range. The following is the output of the search window with a scale of 1.5
 
 ![alt text][image7]
 
@@ -82,40 +88,44 @@ The following is the output after applying the find_cars method on the same imag
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+After extractacting the features, and training the classifier, I used the search windows to predict the presence of cars. Using  the techniques of heat maps and thresholding, the follwoing is the result obtained for a image pipeline.
 
-![alt text][image4]
+![alt text][image9]
+![alt text][image10]
+![alt text][image11]
+![alt text][image12]
+
+The optimization was done on the previous stages for obtaining the features. The threshold for heatmaps was used  by a trying out different values and looking at the result.
 ---
 
 ### Video Implementation
 
 ####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./project_video_output.mp4)
 
 
 ####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected. This is implemented in the pipeline() method and the helpers in the previous section.
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
-### Here are six frames and their corresponding heatmaps:
+The heatmap image is shown below. The corresponding image with the bounding box is shown below after applying a threshold of 15.
 
-![alt text][image5]
+![alt text][image13]
+![alt text][image9]
 
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
-
-### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
-
-
-
+For the video implementation a moving average of the last 10 frames was used. This averaging and then thresholding removed the false positives in the video
 ---
 
 ###Discussion
 
 ####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+The following were the problems faced and some potential areas of improvement
+
+1. The current method is slow, because of the time required for searching using the huge number of windows. A more robust method instead of box search needs to be investigated. 
+2. The method also does not detect boxes in very few instances. This can be made better by using a better detector 
+3. Also in some instances the box is smaller than the car and it might be worth tweaking the heatmap and thresholding parameters.
+
 
