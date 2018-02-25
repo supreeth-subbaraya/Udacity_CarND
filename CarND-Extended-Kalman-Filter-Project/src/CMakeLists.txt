@@ -1,26 +1,19 @@
-project(ExtendedKF)
+include(RegexUtils)
+test_escape_string_as_regex()
 
-cmake_minimum_required (VERSION 3.5)
+file(GLOB Eigen_directory_files "*")
 
-add_definitions(-std=c++11)
+escape_string_as_regex(ESCAPED_CMAKE_CURRENT_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 
-set(CXX_FLAGS "-Wall")
-set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
+foreach(f ${Eigen_directory_files})
+  if(NOT f MATCHES "\\.txt" AND NOT f MATCHES "${ESCAPED_CMAKE_CURRENT_SOURCE_DIR}/[.].+" AND NOT f MATCHES "${ESCAPED_CMAKE_CURRENT_SOURCE_DIR}/src")
+    list(APPEND Eigen_directory_files_to_install ${f})
+  endif()
+endforeach(f ${Eigen_directory_files})
 
-set(sources main.cpp tools.cpp FusionEKF.cpp kalman_filter.cpp tools.h FusionEKF.h kalman_filter.h)
+install(FILES
+  ${Eigen_directory_files_to_install}
+  DESTINATION ${INCLUDE_INSTALL_DIR}/Eigen COMPONENT Devel
+  )
 
-
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin") 
-
-include_directories(/usr/local/include)
-include_directories(/usr/local/opt/openssl/include)
-link_directories(/usr/local/lib)
-link_directories(/usr/local/opt/openssl/lib)
-link_directories(/usr/local/Cellar/libuv/1*/lib)
-
-endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin") 
-
-
-add_executable(ExtendedKF ${sources})
-
-target_link_libraries(ExtendedKF z ssl uv uWS)
+add_subdirectory(src)
