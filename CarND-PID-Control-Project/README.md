@@ -5,9 +5,19 @@ Self-Driving Car Engineer Nanodegree Program
 ## Effect of PID components
 * Without the PID gains, the car moves in a straight line. It does not provide any steering command. This can be seen in videos/zeroGains.avi
 * Applying P (0.1), as shown in onlyP.avi, makes the vehicle to react and provide steering commands. But there is too much oscillation
-* In order to dampen the oscillation, a D gain of (1) can be given to obtain a decent result with, less oscillations and the car finishing without going off track. This can be seen in 
-* In order to mak
+* In order to dampen the oscillation, a D gain of (1) can be given to obtain a decent result with, less oscillations and the car finishing without going off track. This can be seen in onlyPD.avi
+* In order to make car overcome bias a small I gain is given which is seen in pid.avi
+
 ## Choosing hyper parameters
+
+The gains were manually chosen by following the below steps:
+
+1. Set all the gains to zero
+2. Increase P and see how the vehicle reacts
+3. Increase the D till you see oscillations dampned.
+4. Now, as the  vehicle moves in the track, see if P gain needs to be increased for better reaction
+5. If you see a slight drift, add I gain.
+6. Tune until you see a resonable output.
 
 ## Dependencies
 
