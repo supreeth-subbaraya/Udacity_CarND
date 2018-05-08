@@ -3,7 +3,7 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 ## Effect of PID components
-* Without the PID gains, the car moves in a straight line. It does not provide any steering command. This can be seen in videos/zeroGains.avi
+* Without the PID gains, the car moves in a straight line. It does not provide any steering command. This can be seen  [here](https://www.youtube.com/watch?v=PFANG3bQSCY&feature=youtu.be)
 * Applying P (0.1), as shown in onlyP.avi, makes the vehicle to react and provide steering commands. But there is too much oscillation
 * In order to dampen the oscillation, a D gain of (1) can be given to obtain a decent result with, less oscillations and the car finishing without going off track. This can be seen in onlyPD.avi
 * In order to make car overcome bias a small I gain is given which is seen in pid.avi
