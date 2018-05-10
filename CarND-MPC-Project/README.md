@@ -24,7 +24,16 @@ Here,
 
 ### Timestep Length and Elapsed Duration (N & dt)
 
-The value of N=15 and dt=0.05 was chosen.
+The value of N=15 and dt=0.05 was chosen. The other values tried were (15, 0.1), (10, 0.05) etc. These values did not produce good results. The value of (15,0.5) maintained the horizon almost equal to the waypoints provided. With the other values it was either short or too long. Another value I tried was (10,0.1). It also had a similiar behavior as (15,0.5) and it would have better performance due to smaller N.
+
+### Polynomial Fitting and MPC Preprocessing
+
+Before fitting a polynomial the coordinates are transformed to vehicle's coordinates (main.cpp: 109 -115). The polyfit method is used to fit the polynomials.
+
+### Model Predictive Control with Latency
+
+The 100 ms latency is applied in the given starter code. In order to handle this, the acutations and states are considered from one time step later (MPC.cpp: 97-98)
+
 ## Dependencies
 
 * cmake >= 3.5
