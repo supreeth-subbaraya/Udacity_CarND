@@ -5,13 +5,26 @@ Self-Driving Car Engineer Nanodegree Program
 
 ### The Model
 
-x_[t+1] = x[t] + v[t] * cos(psi[t]) * dt
-y_[t+1] = y[t] + v[t] * sin(psi[t]) * dt
-psi_[t+1] = psi[t] + v[t] / Lf * delta[t] * dt
-v_[t+1] = v[t] + a[t] * dt
-cte[t+1] = f(x[t]) - y[t] + v[t] * sin(epsi[t]) * dt
-epsi[t+1] = psi[t] - psides[t] + v[t] * delta[t] / Lf * dt
+The following are the equations of the model used in this project.
 
+* x_[t+1] = x[t] + v[t] * cos(psi[t]) * dt
+* y_[t+1] = y[t] + v[t] * sin(psi[t]) * dt
+* psi_[t+1] = psi[t] + v[t] / Lf * delta[t] * dt
+* v_[t+1] = v[t] + a[t] * dt
+* cte[t+1] = f(x[t]) - y[t] + v[t] * sin(epsi[t]) * dt
+* epsi[t+1] = psi[t] - psides[t] + v[t] * delta[t] / Lf * dt
+
+Here,
+
+* x,y are the vehicle's location
+* psi is the orientation
+* v - velocity
+* cte - Cross Track error
+* epsi - orientation error
+
+### Timestep Length and Elapsed Duration (N & dt)
+
+The value of N=15 and dt=0.05 was chosen.
 ## Dependencies
 
 * cmake >= 3.5
