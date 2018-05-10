@@ -6,8 +6,8 @@
 using CppAD::AD;
 
 // TODO: Set the timestep length and duration
-size_t N = 10;
-double dt = 0.1;
+size_t N = 15;
+double dt = 0.05;
 
 size_t x_start = 0;
 size_t y_start = x_start + N;
